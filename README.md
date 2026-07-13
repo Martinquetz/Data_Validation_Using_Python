@@ -13,7 +13,7 @@ Designed for data migration, system integration, and supply chain transformation
 - [The Solution](#the-solution)
 - [Core Capabilities](#core-capabilities)
   - [Data Reconciliation](#data-reconciliation)
-  - [Data Quality (DQ) Validation](#data-quality-validation)
+  - [Data Quality (DQ) Validation](#data-quality-dq-validation)
   - [Rule-Based Validation](#rule-based-validation)
   - [Reporting](#reporting)
 - [Framework Architecture](#framework-architecture)
