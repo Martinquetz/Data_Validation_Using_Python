@@ -8,21 +8,24 @@ Designed for data migration, system integration, and supply chain transformation
 
 ## Table of Contents
 
-- #overview
-- #the-problem
-- #the-solution
-- #core-capabilities
-  - #data-reconciliation
-  - #data-quality-validation
-  - #rule-based-validation
-  - #reporting
-- [Framework Architecture](#frameworkn-workflow
-- [Example Objects-validated
-- [Example Validation-findings
-- [Technology Stack](#technology-structure
-- [Design-principles
-- [Typical Use Cases](#[Getting Started](#getting-startements
-- [Author-note
+- [Overview](#overview)
+- [The Problem](#the-problem)
+- [The Solution](#the-solution)
+- [Core Capabilities](#core-capabilities)
+  - [Data Reconciliation](#data-reconciliation)
+  - [Data Quality (DQ) Validation](#data-quality-validation)
+  - [Rule-Based Validation](#rule-based-validation)
+  - [Reporting](#reporting)
+- [Framework Architecture](#framework-architecture)
+- [Validation Workflow](#validation-workflow)
+- [Example Objects-Validated](#example-objects-validated)
+- [Example Validation Findings](#example-validation-findings)
+- [Technology Stack](#technology-stack)
+- [Design Principles](design-principles)
+- [Typical Use Cases](#typical-use-cases)
+- [Getting Started](#getting-started)
+- [Future Enhancements](#future-enhancements)
+- [Author Note](#author-note)
 
 ---
 
