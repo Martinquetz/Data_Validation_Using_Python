@@ -1,148 +1,378 @@
-# Config-Driven Data Validation Framework for Supply Chain Systems
-Carrying out a data validation & quality check in a data migration exercise using python.
+# Config-Driven Data Migration Validation Framework
+
+A Python-based validation framework for comparing, reconciling, and assessing enterprise data quality across migration stages.
+
+Designed for data migration, system integration, and supply chain transformation programs, the framework uses configuration-driven rules to validate data quality, detect discrepancies, and measure reconciliation accuracy between source, staging, and target datasets.
+
+---
+
+## Table of Contents
+
+- #overview
+- #the-problem
+- #the-solution
+- #core-capabilities
+  - #data-reconciliation
+  - #data-quality-validation
+  - #rule-based-validation
+  - #reporting
+- [Framework Architecture](#frameworkn-workflow
+- [Example Objects-validated
+- [Example Validation-findings
+- [Technology Stack](#technology-structure
+- [Design-principles
+- [Typical Use Cases](#[Getting Started](#getting-startements
+- [Author-note
+
+---
 
 ## Overview
 
-This project is a configurable data validation framework designed to validate and compare supply chain datasets across multiple transformation stages. It provides a structured, reusable, and scalable approach to ensuring data quality during system integrations and migrations.
+Enterprise data migrations frequently involve multiple transformation layers where records are enriched, transformed, staged, loaded, and reconciled before reaching the target system.
 
-The framework compares datasets across stages such as SAP Load, Postload, Preload, and Construct, applying validation rules, measuring data quality, and generating both console and HTML reports for analysis and presentation.
+This framework provides a scalable and reusable approach for validating data across those stages by performing:
 
----
+- Record-level reconciliation
+- Schema validation
+- Business-rule validation
+- Data-quality measurement
+- Migration readiness assessment
+- Automated reporting
 
-## Key Features
-
-- Config-driven validation logic using JSON configuration files
-- Support for multi-stage dataset comparisons (e.g., sapload → postload → preload → construct)
-- Data quality evaluation across key dimensions (completeness, validity, accuracy, uniqueness, consistency)
-- Automatic detection of mismatches, schema issues, and rule violations
-- Dynamic composite key generation for record-level consistency checks
-- Structured reporting with hierarchical sections (Summary, Snapshot, Key Findings, etc.)
-- Dual rendering:
-  - Console output (for debugging and traceability)
-  - Styled HTML reports (for presentation and sharing)
-- Batch execution across multiple data objects
-- Clean separation of validation logic and reporting logic
+The framework is configuration-driven, allowing validation logic to be defined externally without modifying the core codebase.
 
 ---
 
+## The Problem
 
-## How It Works
+Enterprise migration programs often move data through several transformation stages:
 
-Each object is defined through a configuration file containing:
+```text
+CONSTRUCT (Source)
+    ↓
+PRELOAD
+    ↓
+POSTLOAD
+    ↓
+SAP (Target ERP)
+```
 
-- Dataset pairs to compare across stages
-- Column-level validation rules
-- Composite key definitions
-- Filtering conditions
-- Data quality scoring weights
+During this process, records can:
 
-During execution:
+- Be lost during transformation
+- Become duplicated
+- Fail business-rule validation
+- Drift from source values
+- Be loaded with invalid attributes
+- Become difficult to trace across stages
 
-1. Configuration is loaded
-2. Datasets are read from Excel
-3. Comparisons are performed across defined pairs
-4. Validation rules are applied
-5. Results are summarized and logged
-6. A structured HTML report is generated
+Manually validating thousands of records across multiple datasets is time-consuming, expensive, and error-prone.
 
 ---
 
-## Running the Framework
+## The Solution
+
+This framework automates migration validation by:
+
+- Comparing datasets across migration stages
+- Reconciling records using configurable business keys
+- Detecting schema differences and validation-rule violations
+- Measuring data quality across multiple dimensions
+- Producing structured reports for technical and business stakeholders
+
+The result is a reusable validation layer that can support multiple migration objects with minimal configuration effort.
+
+---
+
+## Core Capabilities
+
+### Data Reconciliation
+
+- Fingerprint-based record matching
+- Composite-key validation
+- Cross-stage record comparison
+- Missing-record detection
+- Reconciliation scoring
+
+### Data Quality (DQ) Validation
+
+Evaluates the Following DQ Dimensions:
+
+- Completeness
+- Validity
+- Accuracy
+- Uniqueness
+- Consistency
+
+### Rule-Based Validation
+
+Supports configurable checks including:
+
+- Value ranges
+- Mandatory fields
+- Allowed values
+- Pattern validation
+- Column profiling
+- Custom business rules
+
+### Reporting
+
+Produces:
+
+- Console validation summaries
+- HTML validation reports
+- PASS / FAIL / WARN indicators
+- Data Quality (DQ) scorecards
+- Validation breakdowns and findings
+
+---
+
+## Framework Architecture
+
+```text
++-------------+
+| JSON Config |
++-------------+
+       |
+       v
++------------------+
+| Dataset Loader   |
++------------------+
+       |
+       v
++------------------+
+| Reconciliation   |
+| Engine           |
++------------------+
+       |
+       v
++------------------+
+| Validation Rules |
++------------------+
+       |
+       v
++------------------+
+| DQ Scoring       |
++------------------+
+       |
+       v
++------------------+
+| Report Generator |
++------------------+
+```
+
+The framework separates validation logic from reporting logic, enabling scalability and maintainability across data objects.
+
+---
+
+## Validation Workflow
+
+```text
+CONFIG
+   ↓
+LOAD DATASETS
+   ↓
+GENERATE FINGERPRINTS
+   ↓
+RECONCILE RECORDS
+   ↓
+APPLY VALIDATION RULES
+   ↓
+CALCULATE DQ SCORES
+   ↓
+GENERATE REPORTS
+```
+
+---
+
+## Example Objects Validated
+
+The framework has been validated using synthetic enterprise-scale migration datasets representing real-world supply chain master data scenarios.
+
+| Object | Validation Focus |
+|----------|----------|
+| STCC Assignment | Reference & mapping validation |
+| Business Share | Hierarchical allocation validation |
+| Distance & Duration | Geospatial and numeric validation |
+| TM Default Route | Route hierarchy and sequence validation |
+
+### Synthetic Data Strategy
+
+To improve reconciliation fidelity, synthetic datasets were generated using a lineage-based approach:
+
+```text
+MASTER
+   ↓
+CONSTRUCT (Source)
+   ↓
+PRELOAD
+   ↓
+POSTLOAD
+   ↓
+SAP (Target ERP)
+```
+
+Each downstream dataset is derived from the preceding stage, preserving business relationships and enabling meaningful reconciliation analysis.
+
+---
+
+## Example Validation Findings
+
+The framework is capable of detecting:
+
+- Schema differences
+- Missing records
+- Invalid values
+- Profile violations
+- Composite-key duplicates
+- Cross-stage reconciliation failures
+- Data-quality degradation
+
+### Example Results
+
+```text
+Status: PASS | Score: 99.60%
+
+Records: 5000
+Alignment: fingerprint
+
+Rule Violations:
+- DB_KEY_not_unique
+```
+
+```text
+Status: FAIL | Score: 97.40%
+
+Rule Violations:
+- DURATION_format_violation
+- composite_key_duplicates
+- LONGITUDE_A_min_violation
+```
+
+---
+
+## Technology Stack
+
+- Python
+- Pandas
+- JSON Configuration
+- HTML/CSS Reporting
+- Jupyter Notebook
+- OpenPyXL (Synthetic Data Generation)
+
+---
+
+## Repository Structure
+
+```text
+migration-data-validation-framework/
+│
+├── README.md
+├── requirements.txt
+│
+├── framework/
+│   ├── validation_runner.py
+│   ├── comparison_engine.py
+│   ├── profiling_engine.py
+│   ├── scoring_engine.py
+│   └── utils/
+│
+├── configs/
+│
+├── sample_data/
+│   ├── STCC/
+│   ├── BusinessShare/
+│   ├── DistanceDuration/
+│   └── TMDefaultRoute/
+│
+├── sample_reports/
+│
+├── screenshots/
+│
+├── docs/
+│   ├── architecture.md
+│   ├── validation_rules.md
+│   ├── scoring_methodology.md
+│   └── synthetic_data_strategy.md
+│
+└── synthetic_generators/
+```
+
+---
+
+## Design Principles
+
+- Configuration-driven architecture
+- Object-agnostic validation logic
+- Separation of validation and reporting concerns
+- Reusable across migration programs
+- Extensible rule framework
+- Scalable to large datasets
+- Technology-independent reporting
+
+---
+
+## Typical Use Cases
+
+- Data Migration Validation
+- ERP Transformation Programs
+- Supply Chain Data Reconciliation
+- Data Quality Assurance
+- System Integration Testing
+- Data Governance Initiatives
+- Migration Readiness Assessments
+
+---
+
+## Getting Started
 
 ### Run All Configurations
 
 ```python
 from pathlib import Path
-```
+from validation_runner import ValidationRunner
+
 runner = ValidationRunner(export_html=True)
-runner.run_all(Path("../configs"))
+runner.run_all(Path("./configs"))
+```
 
+### Run a Single Configuration
 
-Run a Single Configuration
-Pythonrunner = ValidationRunner(export_html=True)runner.run_config(Path("../configs/stcc.json"))Show more lines
+```python
+from pathlib import Path
+from validation_runner import ValidationRunner
 
-Output
-Console Output
-The console provides step-by-step visibility of execution:
+runner = ValidationRunner(export_html=True)
+runner.run_config(Path("./configs/stcc.json"))
+```
 
-Object being processed
-Table under validation
-Summary results per dataset comparison
-Key findings and rule violations
+### Outputs
 
+The framework generates:
 
-HTML Report
-Each object generates a standalone HTML report with:
+- Console execution summaries
+- Validation status indicators
+- Data Quality scorecards
+- HTML reports suitable for stakeholder review
 
-Clean section hierarchy
-Styled headers and subsections
-Highlighted validation status (PASS, FAIL, WARN)
-Structured summaries and detailed breakdowns
+---
 
-Example sections:
+## Future Enhancements
 
-Summary
-Snapshot
-Key Findings
-Validation Summary
-DQ Score Breakdown
-Custom Checks
+- Portfolio-wide validation dashboard
+- Automated PDF report generation
+- CI/CD integration
+- Rule management interface
+- Historical trend analysis
+- Pipeline orchestration support
+- Cloud deployment options
 
+---
 
-Exporting to PDF
-HTML reports can be easily exported to PDF:
+## Author Note
 
-Open the generated report.html
-Press Ctrl + P
-Select "Save as PDF"
+This project was developed as a practical solution for validating enterprise migration datasets through configurable reconciliation, data-quality scoring, and rule-based validation.
 
-For smaller file sizes:
+Synthetic supply-chain migration objects were created to simulate enterprise-scale data migration scenarios and demonstrate validation behavior across multiple transformation stages while preserving realistic business relationships.
 
-Set scale to 80–90%
-Use minimal margins
-Disable background graphics if needed
-
-
-Technology Stack
-
-Python (core logic)
-Pandas (data processing)
-JSON (configuration)
-HTML/CSS (report rendering)
-Jupyter Notebook (execution environment)
-
-
-Design Highlights
-
-Separation of concerns:
-
-Validation logic handled by DataValidator
-Rendering and orchestration handled by ValidationRunner
-
-
-Extensible configuration model
-Reusable across multiple supply chain objects
-Environment-agnostic reporting (console + HTML)
-Scalable to support additional objects and rules
-
-
-Use Cases
-
-Data migration validation
-System integration testing
-Data quality monitoring
-Supply chain data reconciliation
-
-
-Future Enhancements
-
-Aggregate dashboard across all objects
-PDF export automation
-Collapsible sections in HTML reports
-Rule engine extensions
-Integration with data pipelines
-
-
-Conclusion
-This framework provides a robust, reusable solution for validating complex supply chain datasets across multiple transformation stages. Its configuration-driven design, combined with structured reporting, makes it suitable for enterprise-level data quality assurance and migration validation tasks.
-
+The result is a reusable validation framework that combines technical rigor with business-oriented reporting for migration assurance initiatives.
