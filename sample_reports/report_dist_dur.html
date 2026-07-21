@@ -1,0 +1,96 @@
+
+            <html><head><meta charset="UTF-8"><title>tm_distance_duration</title>
+            <style>
+            body{font-family:Arial;background:#f5f5f5;padding:20px}
+            h1{color:#2c3e50} h2{color:#1f4e79;margin-top:20px} h3{color:#555}
+            hr{border:none;border-top:1px solid #ccc;margin:20px 0}
+            .block{background:#fff;padding:12px;border-radius:6px;border:1px solid #ddd;
+                   margin:10px 0;font-family:monospace;white-space:pre-wrap;font-size:13px;
+                   box-shadow:0 1px 3px rgba(0,0,0,0.08)}
+            </style></head><body><div style='color:#b58900;font-weight:bold;margin:10px 0;'>Running: demo_dist_dur.json</div><h1>DATA VALIDATION REVIEW FOR DISTANCE AND DURATION</h1><h3>Cross-validation of S4, Postload, Preload, and Construct datasets for data quality and deviation analysis</h3><div style='color:#c0392b;font-weight:bold;margin:6px 0;padding:6px 8px;background:#fdecea;border-left:4px solid #c0392b;border-radius:4px;'>TABLE:- DISTANCE AND DURATION BUFFERING (/S***/D***_BUFFER)</div><hr><h2>TABLE:- DISTANCE AND DURATION BUFFERING (/S***/D***_BUFFER)</h2><p><b>SUMMARY MODE</b></p><div class='block'>
+
+<div style='border:2px solid #2c3e50;background:#eaf2f8;padding:6px 8px;border-radius:4px;font-weight:bold;color:#2c3e50;margin-bottom:6px;'>Summary for sapload_vs_postload:</div>
+--------------------------------------------------
+<b style='color:#d32f2f;'>Status: FAIL</b> | Score: 97.40%
+Why: Value mismatches in 1 column(s), Validation rule violations found
+
+▸ Snapshot
+  Records → sapload: 3500 | postload: 3500
+  Row match → True
+  Alignment → shared_unique
+  Completeness → sapload: 100.0% | postload: 83.3%
+  Mismatches → 1 | Rules → 6
+
+▸ Key Findings
+  • Mismatches: ['DURATION']
+  • Rule violations: ['LONGITUDE_A_min_violation', 'LATITUDE_A_max_violation', 'LONGITUDE_B_min_violation']
+
+▸ Validation Summary
+  Column mismatches: 1
+  → DURATION
+
+▸ DQ Score Breakdown
+  Completeness: 100% | Validity: 88% | Accuracy: 99% | Uniqueness: 100% | Consistency:100%
+  Overall: 97.40%
+
+▸ Custom Checks
+  ZINTARGETSYS: Column not found in 901_buffer
+  ZINSCOPE_FOR_LOAD: Column not found in 901_buffer
+
+
+<div style='border:2px solid #2c3e50;background:#eaf2f8;padding:6px 8px;border-radius:4px;font-weight:bold;color:#2c3e50;margin-bottom:6px;'>Summary for postload_vs_preload:</div>
+--------------------------------------------------
+<b style='color:#d32f2f;'>Status: FAIL</b> | Score: 92.77%
+Why: Unmatched rows (L=0, R=1), Value mismatches in 4 column(s), Schema differences (missing/extra columns), Validation rule violations found
+
+▸ Snapshot
+  Records → postload: 3500 | preload: 3501
+  Row match → False
+  Alignment → shared_unique
+  Completeness → postload: 83.3% | preload: 100.0%
+  Mismatches → 4 | Rules → 7
+
+▸ Key Findings
+  • Missing (postload): ['CHANGEUTC', 'ACCESSUTC']
+  • Mismatches: ['LATITUDE_A', 'LATITUDE_B', 'LONGITUDE_A']
+  • Rule violations: ['LONGITUDE_A_min_violation', 'LATITUDE_A_max_violation', 'LONGITUDE_B_min_violation']
+
+▸ Validation Summary
+  Column mismatches: 4
+  → LATITUDE_A, LATITUDE_B, LONGITUDE_A, LONGITUDE_B
+
+▸ DQ Score Breakdown
+  Completeness: 83% | Validity: 86% | Accuracy: 96% | Uniqueness: 100% | Consistency:98%
+  Overall: 92.77%
+
+▸ Custom Checks
+  ZINTARGETSYS: Passed
+  ZINSCOPE_FOR_LOAD: Column not found in postload_buffer
+
+
+<div style='border:2px solid #2c3e50;background:#eaf2f8;padding:6px 8px;border-radius:4px;font-weight:bold;color:#2c3e50;margin-bottom:6px;'>Summary for preload_vs_construct:</div>
+--------------------------------------------------
+<b style='color:#f57c00;'>Status: WARN</b> | Score: 98.50%
+Why: Unmatched rows (L=0, R=37), Schema differences (missing/extra columns), Validation rule violations found
+
+▸ Snapshot
+  Records → preload: 3501 | construct: 3538
+  Row match → False
+  Alignment → shared_unique
+  Completeness → preload: 100.0% | construct: 84.6%
+  Mismatches → 0 | Rules → 3
+
+▸ Key Findings
+  • Rule violations: ['DURATION_format_violation', 'SPEED_PROFILE_min_length', 'composite_key_duplicates']
+
+▸ Validation Summary
+  Column mismatches: 0
+
+▸ DQ Score Breakdown
+  Completeness: 100% | Validity: 94% | Accuracy: 100% | Uniqueness: 100% | Consistency:98%
+  Overall: 98.50%
+
+▸ Custom Checks
+  ZINTARGETSYS: Column not found in preload_buffer
+  ZINSCOPE_FOR_LOAD: Column not found in preload_buffer</div><p><b>Visualizations skipped in HTML export mode</b></p></body></html>
+            
