@@ -9,6 +9,7 @@ Designed for data migration, system integration, and supply chain transformation
 ## Table of Contents
 
 - [Overview](#overview)
+- [Project Demonstration](#project-demonstration)
 - [The Problem](#the-problem)
 - [The Solution](#the-solution)
 - [Core Capabilities](#core-capabilities)
@@ -20,6 +21,7 @@ Designed for data migration, system integration, and supply chain transformation
 - [Validation Workflow](#validation-workflow)
 - [Example Objects-Validated](#example-objects-validated)
 - [Example Validation Findings](#example-validation-findings)
+- [Sample Assets](#sample-assets)
 - [Technology Stack](#technology-stack)
 - [Design Principles](design-principles)
 - [Typical Use Cases](#typical-use-cases)
@@ -43,6 +45,40 @@ This framework provides a scalable and reusable approach for validating data acr
 - Automated reporting
 
 The framework is configuration-driven, allowing validation logic to be defined externally without modifying the core codebase.
+
+---
+## Project Demonstration
+
+The framework has been validated using multiple synthetic enterprise-scale migration objects representing common supply-chain and SAP data migration scenarios.
+
+| Object | Validation Focus |
+|----------|----------|
+| STCC Assignment | Reference & mapping validation |
+| Business Share | Hierarchical allocation validation |
+| Distance & Duration | Geospatial and numeric validation |
+| TM Default Route | Route hierarchy and reconciliation |
+
+### Included Portfolio Assets
+
+- Synthetic migration datasets
+- Validation reports
+- Validation screenshots
+- Configuration examples
+- Architecture documentation
+- Data quality scoring methodology
+
+### Sample Outputs
+
+See:
+
+```text
+sample_data/
+sample_reports/
+screenshots/
+```
+
+for representative examples.
+
 
 ---
 
@@ -268,6 +304,35 @@ Rule Violations:
 <img width="965" height="804" alt="Validation and DQ Verdicts" src="https://github.com/user-attachments/assets/fbf87809-f389-4ec6-b16a-15e23f047c30" />
 
 *The verdict to pass or fail is dependent on the rule defined by the business per stage per acceptable/know tolerance.*
+---
+## Sample Assets
+
+The repository includes representative synthetic migration datasets and generated validation reports.
+
+### Sample Data
+
+- Business Share
+- Distance & Duration
+- Geolocation
+- STCC Assignment
+- TM Default Route
+
+Location:
+
+```text
+sample_data/
+
+```
+
+### Sample Report
+
+Generated validation outputs are available under:
+
+```text
+sample_reports/
+
+```
+
 ---
 
 ## Technology Stack
