@@ -232,11 +232,11 @@ The framework is capable of detecting:
 - Data-quality degradation
 
 
-   1. Summary View Findings
+#### Summary View Findings
 <img width="902" height="801" alt="Report Summary View" src="https://github.com/user-attachments/assets/22de1e19-a8ab-450d-8603-bd5cab977d01" />
 
   
-   2. Detailed View Findings
+#### Detailed View Findings
 <img width="1351" height="3488" alt="Report - Detailed View" src="https://github.com/user-attachments/assets/8b920258-2f6d-4c12-a08a-d3e996d11932" />
 
 
@@ -267,7 +267,7 @@ Rule Violations:
 ### Validation Verdicts
 <img width="965" height="804" alt="Validation and DQ Verdicts" src="https://github.com/user-attachments/assets/fbf87809-f389-4ec6-b16a-15e23f047c30" />
 
-***The verdict to pass or fail is dependent on the rule defined by the business per stage per acceptable/know tolerance.*
+*The verdict to pass or fail is dependent on the rule defined by the business per stage per acceptable/know tolerance.*
 ---
 
 ## Technology Stack
