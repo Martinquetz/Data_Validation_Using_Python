@@ -222,7 +222,7 @@ Each downstream dataset is derived from the preceding stage, preserving business
 ## Example Validation Findings
 
    1. Summary View Findings
-screenshots/Report_Summary_View.png
+screenshots/report_summary_view.png
   
    2. Detailed View Findings
 screenshots/Report_-_Detailed_View.png
